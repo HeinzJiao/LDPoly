@@ -2,7 +2,7 @@ The code, data, pretrained weights are currently being organized and will be upl
 
 # 🔍 Inference & Evaluation Guide
 
-# 1. Testing on Deventer Road Dataset
+# 1. 🧪 Testing on Deventer Road Dataset
 ## Step 1 — Diffusion Model Sampling
 Generates segmentation logits + vertex heatmaps.
 ```bash
@@ -42,6 +42,19 @@ python scripts/polygonization.py \
     --d_th 5 \
     --polygonization_vis_path ./outputs/deventer_road_reproduction/epoch=824-step=739199/polygonization_vis
 ```
+
+2. 🖼️ Inference on Any Image or Folder (Generalization Testing)
+```bash
+PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
+    --input path/to/image_or_folder \
+    --outdir path/to/output_folder \
+    --run 2024-12-24T23-55-18_deventer_road_mask_vertex_heatmap_split_by_image_PreConvConcat_ChannelEmbed \
+    --model_ckpt epoch=824-step=739199.ckpt \
+    --sampler ddim \
+    --ddim_steps 20 \
+    --d_th 5
+```
+This will produce: segmentation logits, vertex heatmaps, vector polygons
 
 # Dataset (ready)
 The Dutch polygonal road outline extraction dataset can be downloaded [here] (https://drive.google.com/drive/folders/1jsjuZxFdU9a8q-m0TNCj1MfX9rixTYJl?usp=sharing)
