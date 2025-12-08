@@ -68,8 +68,13 @@ python evaluation.py \
 - `cse` → pixel-level coverage (**IoU, B-IoU**), polygon simplicity (**S-IoU**), vertex efficiency (**C-IoU, N-ratio**)
 - `r`   → polygon regularity (**PoLiS, SCR**)
 
-# Dataset (ready)
-The Dutch polygonal road outline extraction dataset can be downloaded [here] (https://drive.google.com/drive/folders/1jsjuZxFdU9a8q-m0TNCj1MfX9rixTYJl?usp=sharing)
+## Dataset & Pretrained Weights
+
+The **Dutch polygonal road outline extraction dataset** and the **pretrained LDPoly weights** (trained on the Deventer region) can be downloaded here:
+
+👉 **[Google Drive — Dataset + Pretrained Weights](https://drive.google.com/drive/folders/1jsjuZxFdU9a8q-m0TNCj1MfX9rixTYJl?usp=sharing)**
+
+Place the pretrained checkpoint under:
 
 # Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
