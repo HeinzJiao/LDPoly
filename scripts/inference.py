@@ -11,8 +11,8 @@ This script:
 
 Example:
     PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
-        --input "./data/KSA_SpaceGeoAI_ITC_Project/ksa_patch_12-13_1024x1024_resized_256" \
-        --outdir "./outputs/KSA_SpaceGeoAI_ITC_Project/ksa_patch_12-13_1024x1024_resized_256" \
+        --input path/to/any/image_folder \
+        --outdir path/to/any/image_folder \
         --run 2024-12-24T23-55-18_deventer_road_mask_vertex_heatmap_split_by_image_PreConvConcat_ChannelEmbed \
         --model_ckpt epoch=824-step=739199.ckpt \
         --sampler ddim \
@@ -32,7 +32,6 @@ from einops import rearrange
 from omegaconf import OmegaConf
 from tqdm import tqdm
 from skimage.measure import label, regionprops
-
 from ldm.util import instantiate_from_config
 from scripts.extract_vertices_from_heatmap import extract_vertices_from_heatmap
 from scripts.polygonization import get_poly
