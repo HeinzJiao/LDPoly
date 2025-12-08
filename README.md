@@ -1,6 +1,6 @@
 The code, data, pretrained weights are currently being organized and will be uploaded before Chirstmas.
 
-# 🔍 Inference & Evaluation Guide
+# Inference & Evaluation (ready)
 
 # 1. 🧪 Testing on Deventer Road Dataset
 ## Step 1 — Diffusion Model Sampling
@@ -54,7 +54,19 @@ PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
     --ddim_steps 20 \
     --d_th 5
 ```
-This will produce: segmentation logits, vertex heatmaps, vector polygons
+This will produce: segmentation logits, vertex heatmaps, vector polygons.
+
+# 3. 📊 Evaluation Metrics
+```bash
+python evaluation.py \
+    --gt-file ./data/deventer_road/annotations/test.json \
+    --dt-file ./outputs/deventer_road_reproduction/epoch=824-step=739199/polygons_seg_ddim_vertices_from_heat_th-0.1_k-3_dp_eps2.json \
+    --output ./outputs/deventer_road_reproduction/epoch=824-step=739199 \
+    --eval-type cse
+```
+`--eval-type`:
+- `cse` → pixel-level coverage (**IoU, B-IoU**), polygon simplicity (**S-IoU**), vertex efficiency (**C-IoU, N-ratio**)
+- `r`   → polygon regularity (**PoLiS, SCR**)
 
 # Dataset (ready)
 The Dutch polygonal road outline extraction dataset can be downloaded [here] (https://drive.google.com/drive/folders/1jsjuZxFdU9a8q-m0TNCj1MfX9rixTYJl?usp=sharing)
