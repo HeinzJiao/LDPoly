@@ -2,7 +2,7 @@ The code, data, pretrained weights are currently being organized and will be upl
 
 # Inference & Evaluation (ready)
 
-## Testing on Deventer Road Dataset
+## 1. Testing on Deventer Road Dataset
 ### Step 1 — Diffusion Model Sampling
 Generates segmentation logits + vertex heatmaps.
 ```bash
@@ -43,7 +43,7 @@ python scripts/polygonization.py \
     --polygonization_vis_path ./outputs/deventer_road_reproduction/epoch=824-step=739199/polygonization_vis
 ```
 
-## Inference on Any Image or Folder (Generalization Testing)
+## 2. Inference on Any Image or Folder (Generalization Testing)
 ```bash
 PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
     --input path/to/image_or_folder \
@@ -56,7 +56,7 @@ PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
 ```
 This will produce: segmentation logits, vertex heatmaps, vector polygons.
 
-## Evaluation Metrics
+## 3. Evaluation Metrics
 ```bash
 python evaluation.py \
     --gt-file ./data/deventer_road/annotations/test.json \
