@@ -1,5 +1,3 @@
-The code, data, pretrained weights are currently being organized and will be uploaded before Chirstmas.
-
 # Inference & Evaluation (ready)
 
 ## 1. Testing on Deventer Road Dataset
@@ -84,3 +82,5 @@ After downloading:
 
 # Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
+
+The training code, experimental setup and demo are currently being organized and will be updated before Chirstmas.
