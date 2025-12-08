@@ -43,7 +43,7 @@ python scripts/polygonization.py \
     --polygonization_vis_path ./outputs/deventer_road_reproduction/epoch=824-step=739199/polygonization_vis
 ```
 
-2. 🖼️ Inference on Any Image or Folder (Generalization Testing)
+# 2. 🖼️ Inference on Any Image or Folder (Generalization Testing)
 ```bash
 PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
     --input path/to/image_or_folder \
