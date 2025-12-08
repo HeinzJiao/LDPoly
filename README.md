@@ -74,7 +74,7 @@ The **Dutch polygonal road outline extraction dataset** and the **pretrained LDP
 
 👉 **[Google Drive — Dataset + Pretrained Weights](https://drive.google.com/drive/folders/1jsjuZxFdU9a8q-m0TNCj1MfX9rixTYJl?usp=sharing)**
 
-Place the pretrained checkpoint under:
+After downloading, place the provided `logs/` folder directly in the project root.
 
 # Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
