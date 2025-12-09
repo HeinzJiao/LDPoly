@@ -95,12 +95,14 @@ class SegVertexBase(Dataset):
     """
     def __init__(self, coco_annotation_file,
                  image_dir, mask_dir=None,
-                 mode="train", transforms=None):
+                 mode="train", transforms=None, size=256, num_classes=2):
 
         self.image_dir = image_dir
         self.mask_dir = mask_dir
         self.transforms = transforms or []
         self.mode = mode
+        self.size = size
+        self.num_classes=num_classes
 
         # COCO annotation is optional
         if coco_annotation_file is not None and os.path.exists(coco_annotation_file):
@@ -220,77 +222,156 @@ class SegVertexBase(Dataset):
 
         return example
 
+    def apply_transform(self, segmentation, image, vertex_locations):
+        """
+        Apply geometric augmentations (flip / rotate) to image, segmentation mask,
+        and vertex locations in a consistent way.
+
+        Args:
+            segmentation (PIL.Image or None): Segmentation mask.
+            image (PIL.Image): Input image.
+            vertex_locations (list[(x, y)]): List of vertex coordinates.
+
+        Returns:
+            segmentation, image, vertex_locations: Transformed outputs.
+        """
+        width, height = image.size
+
+        for transform in self.transforms:
+            # Horizontal flip
+            if transform == "hflip" and np.random.rand() > 0.5:
+                if segmentation is not None:
+                    segmentation = F.hflip(segmentation)
+                image = F.hflip(image)
+
+                if len(vertex_locations) > 0:
+                    # x' = (W - 1) - x
+                    vertex_locations = [
+                        (width - 1 - x, y) for (x, y) in vertex_locations
+                    ]
+
+            # Vertical flip
+            elif transform == "vflip" and np.random.rand() > 0.5:
+                if segmentation is not None:
+                    segmentation = F.vflip(segmentation)
+                image = F.vflip(image)
+
+                if len(vertex_locations) > 0:
+                    # y' = (H - 1) - y
+                    vertex_locations = [
+                        (x, height - 1 - y) for (x, y) in vertex_locations
+                    ]
+
+            # Rotation by 90 / 180 / 270 degrees (CCW)
+            elif transform == "rotate" and np.random.rand() > 0.5:
+                angle = random.choice([90, 180, 270])
+
+                if segmentation is not None:
+                    segmentation = F.rotate(segmentation, angle)
+                image = F.rotate(image, angle)
+
+                if len(vertex_locations) > 0:
+                    if angle == 90:
+                        # (x, y) -> (y, W - 1 - x), then swap width/height
+                        vertex_locations = [
+                            (y, width - 1 - x) for (x, y) in vertex_locations
+                        ]
+                        width, height = height, width
+
+                    elif angle == 180:
+                        # (x, y) -> (W - 1 - x, H - 1 - y)
+                        vertex_locations = [
+                            (width - 1 - x, height - 1 - y)
+                            for (x, y) in vertex_locations
+                        ]
+
+                    elif angle == 270:
+                        # (x, y) -> (H - 1 - y, x), then swap width/height
+                        vertex_locations = [
+                            (height - 1 - y, x) for (x, y) in vertex_locations
+                        ]
+                        width, height = height, width
+
+        # Final rounding + clamping to valid image coordinates
+        if len(vertex_locations) > 0:
+            vertex_locations = [
+                (
+                    min(max(int(round(x)), 0), width - 1),
+                    min(max(int(round(y)), 0), height - 1),
+                )
+                for (x, y) in vertex_locations
+            ]
+
+        return segmentation, image, vertex_locations
 
 # -------------------------------------------------------------
 # Region-specific dataset definitions
 # -------------------------------------------------------------
 
 class DeventerRoadTrain(SegVertexBase):
-    def __init__(self):
+    def __init__(self, size=256, num_classes=2, **kwargs):
+        """Deventer road training split."""
         super().__init__(
             coco_annotation_file="data/deventer_road/annotations/train.json",
             image_dir="data/deventer_road/train_images",
             mask_dir="data/deventer_road/train_masks",
             mode="train",
-            transforms=["hflip", "vflip", "rotate"]
+            transforms=["hflip", "vflip", "rotate"],
+            size=size,
+            num_classes=num_classes,
         )
 
 
 class DeventerRoadValidation(SegVertexBase):
-    def __init__(self):
+    def __init__(self, size=256, num_classes=2, **kwargs):
+        """Deventer road validation split."""
         super().__init__(
             coco_annotation_file="data/deventer_road/annotations/test.json",
             image_dir="data/deventer_road/test_images",
             mask_dir="data/deventer_road/test_masks",
             mode="val",
-            transforms=[]
+            transforms=[],
+            size=size,
+            num_classes=num_classes,
         )
 
 
 class DeventerRoadTest(SegVertexBase):
-    def __init__(self):
+    def __init__(self, size=256, num_classes=2, **kwargs):
+        """Deventer road test split."""
         super().__init__(
             coco_annotation_file="data/deventer_road/annotations/test.json",
             image_dir="data/deventer_road/test_images",
             mask_dir="data/deventer_road/test_masks",
             mode="test",
-            transforms=[]
+            transforms=[],
+            size=size,
+            num_classes=num_classes,
         )
 
 
 class EnschedeRoadTest(SegVertexBase):
-    def __init__(self):
+    def __init__(self, size=256, num_classes=2, **kwargs):
         super().__init__(
             coco_annotation_file="data/enschede_road/annotations/test.json",
             image_dir="data/enschede_road/test_images",
             mask_dir="data/enschede_road/test_masks",
             mode="test",
-            transforms=[]
+            transforms=[],
+            size=size,
+            num_classes=num_classes,
         )
 
 
 class GiethoornRoadTest(SegVertexBase):
-    def __init__(self):
+    def __init__(self, size=256, num_classes=2, **kwargs):
         super().__init__(
             coco_annotation_file="data/giethoorn_road/annotations/test.json",
             image_dir="data/giethoorn_road/test_images",
             mask_dir="data/giethoorn_road/test_masks",
             mode="test",
-            transforms=[]
-        )
-
-class KSA_SpaceGeoAI_ITC_Project(SegVertexBase):
-    """
-    Generalization / image-only test set for the KSA SpaceGeoAI ITC project.
-
-    No annotations and masks are provided; only RGB tiles are loaded.
-    """
-    def __init__(self):
-        super().__init__(
-            coco_annotation_file=None,  # no COCO annotations (image-only generalization test)
-            image_dir="data/KSA_SpaceGeoAI_ITC_Project/ksa_patch_13-14_1024x1024_resized_256",
-            mask_dir=None,              # no masks
-            mode="test",
             transforms=[],
+            size=size,
+            num_classes=num_classes,
         )
 
