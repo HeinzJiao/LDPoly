@@ -104,11 +104,13 @@ After downloading:
 # Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
 
-# The demo will be updated before Chirstmas.
+# Code Status
+The demo will be updated before Chirstmas. We will open access once the notebook is ready.
 
 The codebase will continue to be refined and standardized, but the current version is fully functional for both training and inference.
 If you encounter any issues, feel free to open an Issue on GitHub.
 
+# Citation
 We kindly encourage you to cite our paper if you find LDPoly useful in your research:
 ```bash
 @article{jiao2025ldpoly,
