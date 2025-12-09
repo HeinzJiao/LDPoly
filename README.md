@@ -1,5 +1,5 @@
 # LDPoly: Latent diffusion for polygonal road outline extraction in large-scale topographic mapping
-This is the official repository for LDPoly, the first diffusion-based framework for polygonal road outline extraction.
+This is the official repository for LDPoly, the first generative framework and benchmark for polygonal road outline extraction.
 
 ## Environment Setup
 ```bash
