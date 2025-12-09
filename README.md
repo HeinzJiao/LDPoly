@@ -1,10 +1,10 @@
-# Environment Setup
+## Environment Setup
 ```bash
 conda env create -f environment.yaml
 conda activate ldpoly
 ```
 
-# Training
+## Training
 To train LDPoly on the Deventer region, run:
 ```bash
 python -u main.py --base configs/latent-diffusion/deventer_road_mask_vertex_heatmap-ldm-kl-8.yaml -t --gpus 0, \
@@ -19,10 +19,10 @@ Example:
 --resume logs/2024-12-24T23-55-18_deventer_road_mask_vertex_heatmap_split_by_image_PreConvConcat_ChannelEmbed
 ```
 
-# Inference & Evaluation
+## Inference & Evaluation
 
-## 1. Testing on Deventer Road Dataset
-### Step 1 — Diffusion Model Sampling
+### 1. Testing on Deventer Road Dataset
+#### Step 1 — Diffusion Model Sampling
 Generates segmentation logits + vertex heatmaps.
 ```bash
 PYTHONPATH=./:$PYTHONPATH python -u scripts/evaluate.py \
@@ -37,7 +37,7 @@ PYTHONPATH=./:$PYTHONPATH python -u scripts/evaluate.py \
     --ddim_steps 20
 ```
 
-### Step 2 - Extract Vertices from Heatmap
+#### Step 2 - Extract Vertices from Heatmap
 Outputs per-image vertex coordinate lists in JSON format.
 ```bash
 python scripts/extract_vertices_from_heatmap.py \
@@ -49,7 +49,7 @@ python scripts/extract_vertices_from_heatmap.py \
     --kernel_size 3
 ```
 
-### Step 3 - Polygonization
+#### Step 3 - Polygonization
 ```bash
 python scripts/polygonization.py \
     --annotation_path ./data/deventer_road/annotations/test.json \
@@ -62,7 +62,7 @@ python scripts/polygonization.py \
     --polygonization_vis_path ./outputs/deventer_road_reproduction/epoch=824-step=739199/polygonization_vis
 ```
 
-## 2. Inference on Any Image or Folder (Generalization Testing)
+### 2. Inference on Any Image or Folder (Generalization Testing)
 ```bash
 PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
     --input path/to/image_or_folder \
@@ -75,7 +75,7 @@ PYTHONPATH=./:$PYTHONPATH python scripts/inference.py \
 ```
 This will produce: segmentation logits, vertex heatmaps, vector polygons.
 
-## 3. Evaluation Metrics
+### 3. Evaluation Metrics
 ```bash
 python evaluation.py \
     --gt-file ./data/deventer_road/annotations/test.json \
@@ -87,7 +87,7 @@ python evaluation.py \
 - `cse` → pixel-level coverage (**IoU, B-IoU**), polygon simplicity (**S-IoU**), vertex efficiency (**C-IoU, N-ratio**)
 - `r`   → polygon regularity (**PoLiS, SCR**)
 
-# Dataset & Pretrained Weights
+## Dataset & Pretrained Weights
 
 The **Dutch polygonal road outline extraction dataset** and the **pretrained LDPoly weights** (trained on the Deventer region) can be downloaded here:
 
@@ -101,16 +101,16 @@ After downloading:
 2. **Place the entire `data/` folder in the project root**  
    (LDPoly will automatically find the dataset structure.)
 
-# Demo (to be updated)
+## Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
 
-# Code Status
+## Code Status
 The demo will be updated before Chirstmas. We will open access once the notebook is ready.
 
 The codebase will continue to be refined and standardized, but the current version is fully functional for both training and inference.
 If you encounter any issues, feel free to open an Issue on GitHub.
 
-# Citation
+## Citation
 We kindly encourage you to cite our paper if you find LDPoly useful in your research:
 ```bash
 @article{jiao2025ldpoly,
