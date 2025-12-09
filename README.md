@@ -1,3 +1,24 @@
+# Environment Setup
+```bash
+conda env create -f environment.yaml
+conda activate ldpoly
+```
+
+# Training
+To train LDPoly on the Deventer region, run:
+```bash
+python -u main.py --base configs/latent-diffusion/deventer_road_mask_vertex_heatmap-ldm-kl-8.yaml -t --gpus 0, \
+--name deventer_r_v-ldm-kl-8
+```
+To resume training from a checkpoint, replace --name with:
+```bash
+--resume logs/<your_experiment_folder>
+```
+Example:
+```bash
+--resume logs/2024-12-24T23-55-18_deventer_road_mask_vertex_heatmap_split_by_image_PreConvConcat_ChannelEmbed
+```
+
 # Inference & Evaluation (ready)
 
 ## 1. Testing on Deventer Road Dataset
