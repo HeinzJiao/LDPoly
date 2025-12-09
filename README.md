@@ -19,7 +19,7 @@ Example:
 --resume logs/2024-12-24T23-55-18_deventer_road_mask_vertex_heatmap_split_by_image_PreConvConcat_ChannelEmbed
 ```
 
-# Inference & Evaluation (ready)
+# Inference & Evaluation
 
 ## 1. Testing on Deventer Road Dataset
 ### Step 1 — Diffusion Model Sampling
@@ -87,7 +87,7 @@ python evaluation.py \
 - `cse` → pixel-level coverage (**IoU, B-IoU**), polygon simplicity (**S-IoU**), vertex efficiency (**C-IoU, N-ratio**)
 - `r`   → polygon regularity (**PoLiS, SCR**)
 
-# Dataset & Pretrained Weights (ready)
+# Dataset & Pretrained Weights
 
 The **Dutch polygonal road outline extraction dataset** and the **pretrained LDPoly weights** (trained on the Deventer region) can be downloaded here:
 
@@ -104,4 +104,21 @@ After downloading:
 # Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
 
-# The training code, experimental setup and demo are currently being organized and will be updated before Chirstmas.
+# The demo will be updated before Chirstmas.
+
+The codebase will continue to be refined and standardized, but the current version is fully functional for both training and inference.
+If you encounter any issues, feel free to open an Issue on GitHub.
+
+We kindly encourage you to cite our paper if you find LDPoly useful in your research:
+```bash
+@article{jiao2025ldpoly,
+  title={LDPoly: Latent diffusion for polygonal road outline extraction in large-scale topographic mapping},
+  author={Jiao, Weiqin and Cheng, Hao and Vosselman, George and Persello, Claudio},
+  journal={ISPRS Journal of Photogrammetry and Remote Sensing},
+  volume={230},
+  pages={820--842},
+  year={2025},
+  publisher={Elsevier}
+}
+```
+We welcome collaborations in polygonal vectorization, topographic mapping, and related research areas.
