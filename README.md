@@ -127,13 +127,10 @@ We welcome collaborations in polygonal vectorization, topographic mapping, and r
 
 We gratefully acknowledge the open-source contributions that made this work possible:
 
-- **HiSup** – Polygonal building/road extraction baseline  
-  https://github.com/SarahwXU/HiSup  
+- **HiSup** – https://github.com/SarahwXU/HiSup  
 
-- **Stable Diffusion** – Foundational latent diffusion architecture  
-  https://github.com/pesser/stable-diffusion  
+- **Stable Diffusion** – https://github.com/pesser/stable-diffusion  
 
-- **SDSeg** – Stable-Diffusion-based segmentation framework  
-  https://github.com/lin-tianyu/Stable-Diffusion-Seg  
+- **SDSeg** – https://github.com/lin-tianyu/Stable-Diffusion-Seg  
 
 Their excellent codebases provided valuable inspiration and technical foundations for LDPoly.
