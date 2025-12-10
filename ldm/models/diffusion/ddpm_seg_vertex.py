@@ -77,6 +77,7 @@ class DDPM(pl.LightningModule):
                  given_betas=None,
                  v_posterior=0.,  # weight for choosing posterior variance as sigma = (1-v) * beta_tilde + v * beta
                  original_elbo_weight=0.,
+                 l_simple_weight=1.,
                  l_simple_mask_weight=1.,
                  l_simple_heat_weight=1.,
                  l_x0_mask_weight=1.,
@@ -123,6 +124,7 @@ class DDPM(pl.LightningModule):
         self.original_elbo_weight = original_elbo_weight
 
         # 损失函数各项权重
+        self.l_simple_weight = l_simple_weight
         self.l_simple_mask_weight = l_simple_mask_weight
         self.l_simple_heat_weight = l_simple_heat_weight
         self.l_x0_mask_weight = l_x0_mask_weight
