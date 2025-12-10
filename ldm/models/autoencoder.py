@@ -100,7 +100,15 @@ class VQModel(pl.LightningModule):
                     print(f"{context}: Restored training weights")
 
     def init_from_ckpt(self, path, ignore_keys=list()):
-        sd = torch.load(path, map_location="cpu")["state_dict"]
+        # sd = torch.load(path, map_location="cpu")["state_dict"]
+
+        # Explicitly disable `weights_only` so that PyTorch can load
+        # full PyTorch Lightning checkpoints (which may contain callbacks, etc.).
+        sd_raw = torch.load(path, map_location="cpu", weights_only=False)
+        # Standard PL checkpoints store weights under the "state_dict" key.
+        sd = sd_raw["state_dict"] if isinstance(sd_raw, dict) and "state_dict" in sd_raw else sd_raw
+
+        
         keys = list(sd.keys())
         for k in keys:
             for ik in ignore_keys:
