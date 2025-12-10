@@ -9,7 +9,7 @@ conda env create -f environment.yaml
 conda activate ldpoly
 ```
 
-## Training
+## ▫️Training
 To train LDPoly on the Deventer region, run:
 ```bash
 python -u main.py --base configs/latent-diffusion/deventer_road_mask_vertex_heatmap-ldm-kl-8.yaml -t --gpus 0, \
@@ -24,7 +24,7 @@ Example:
 --resume logs/2024-12-24T23-55-18_deventer_road_mask_vertex_heatmap_split_by_image_PreConvConcat_ChannelEmbed
 ```
 
-## Inference & Evaluation
+## ▫️Inference & Evaluation
 
 ### 1. Testing on Deventer Road Dataset
 #### Step 1 — Diffusion Model Sampling
@@ -92,7 +92,7 @@ python evaluation.py \
 - `cse` → pixel-level coverage (**IoU, B-IoU**), polygon simplicity (**S-IoU**), vertex efficiency (**C-IoU, N-ratio**)
 - `r`   → polygon regularity (**PoLiS, SCR**)
 
-## Dataset & Pretrained Weights
+## ▫️Dataset & Pretrained Weights
 
 The **Dutch polygonal road outline extraction dataset** and the **pretrained LDPoly weights** (trained on the Deventer region) can be downloaded here:
 
@@ -106,16 +106,16 @@ After downloading:
 2. **Place the entire `data/` folder in the project root**  
    (LDPoly will automatically find the dataset structure.)
 
-## Demo (to be updated)
+## ▫️Demo (to be updated)
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
 
-## Code Status
+## ▫️Code Status
 The demo will be updated before Chirstmas. We will open access once the notebook is ready.
 
 The codebase will continue to be refined and standardized, but the current version is fully functional for both training and inference.
 If you encounter any issues, feel free to open an Issue on GitHub.
 
-## Citation
+## ▫️Citation
 We kindly encourage you to cite our paper if you find LDPoly useful in your research:
 ```bash
 @article{jiao2025ldpoly,
@@ -130,6 +130,6 @@ We kindly encourage you to cite our paper if you find LDPoly useful in your rese
 ```
 We welcome collaborations in polygonal vectorization, topographic mapping, and related research areas.
 
-## Acknowledgements
+## ▫️Acknowledgements
 
 This repository benefits from the excellent open-source contributions of [HiSup](https://github.com/SarahwXU/HiSup), [Stable Diffusion](https://github.com/pesser/stable-diffusion), and [SDSeg](https://github.com/lin-tianyu/Stable-Diffusion-Seg). We thank the authors for their great work.
