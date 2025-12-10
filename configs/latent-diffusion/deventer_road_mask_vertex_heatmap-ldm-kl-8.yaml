@@ -2,7 +2,7 @@
 # ----------------------------------------
 # 模型配置文件（用于提取道路mask与顶点heatmap）
 #
-# 1. 数据加载器：使用 ldm/data/shanghai_building_mask_vertex_heatmap.py 加载数据。
+# 1. 数据加载器：使用 ldm/data/dataset_seg_vertex.py 加载数据。
 #
 # 2. 图片条件：使用 autoencoder 得到的 image latent vector 作为条件输入。
 #
@@ -10,18 +10,18 @@
 #    通过 PreConvConat_ChannelEmbed 融合起来。
 #
 # 4. 模型文件：模型实现位于：
-#    ldm/models/diffusion/ddpm_building_mask_vertex_heatmap.py;
+#    ldm/models/diffusion/ddpm_seg_vertex.py;
 #    ldm/modules/diffusionmodules/openaimodel_PreConvConat_ChannelEmbed.py。
 # ----------------------------------------
 model:
   base_learning_rate: 1e-5   # ori: 5e-5
-  target: ldm.models.diffusion.ddpm_building_mask_vertex_heatmap.LatentDiffusion
+  target: ldm.models.diffusion.ddpm_seg_vertex.LatentDiffusion
   params:
     num_classes: 2
     l_simple_mask_weight: 1.
-    l_simple_heat_weight: 0.5
+    l_simple_heat_weight: 1.
     l_x0_mask_weight: 1.
-    l_x0_heat_weight: 0.5
+    l_x0_heat_weight: 1.
     linear_start: 0.0015
     linear_end: 0.0155
     num_timesteps_cond: 1
@@ -34,11 +34,11 @@ model:
     image_size: 32
     channels: 4
     cond_stage_trainable: True    # modified
-    use_pretrained_backbone: False
     concat_mode: True
     scale_by_std: True
     use_ema: True
-    monitor: 'every_10_epochs'
+    monitor: 'every_N_epochs'
+    checkpoint_every_n_epochs: 50
     #ckpt_path: "models/ldm/lsun_churches256/model.ckpt"
 
     scheduler_config: # 10000 warmup steps
@@ -66,7 +66,8 @@ model:
         dropout: 0.2
         use_spatial_transformer: False
 
-    backbone_config: # ***custom pretrained backbone
+    use_pretrained_backbone: False
+    backbone_config: # ***custom pretrained backbone (not used by default)
       MODEL:
         NAME: "HRNet48v2"
         HEAD_SIZE: [ [ 2 ] ]
@@ -114,15 +115,15 @@ data:
     num_workers: 8
     wrap: False
     train:
-      target: ldm.data.shanghai_building_mask_vertex_heatmap.DeventerRoadTrain
+      target: ldm.data.dataset_seg_vertex.DeventerRoadTrain
       params:
         size: 256
     validation:
-      target: ldm.data.shanghai_building_mask_vertex_heatmap.DeventerRoadValidation
+      target: ldm.data.dataset_seg_vertex.DeventerRoadValidation
       params:
         size: 256
     test:
-      target: ldm.data.shanghai_building_mask_vertex_heatmap.DeventerRoadTest
+      target: ldm.data.dataset_seg_vertex.DeventerRoadTest
       params:
         size: 256
 
