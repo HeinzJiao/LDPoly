@@ -1,4 +1,4 @@
-from ldm.models.diffusion.ddpm_building_mask_vertex_heatmap import LatentDiffusion
+from ldm.models.diffusion.ddpm_seg_vertex import LatentDiffusion
 import torch
 import tqdm
 from tqdm import tqdm
