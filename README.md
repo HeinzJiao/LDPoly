@@ -1,7 +1,9 @@
 # LDPoly: Latent diffusion for polygonal road outline extraction in large-scale topographic mapping
 This is the official repository for LDPoly, the first generative framework and benchmark for polygonal road outline extraction.
 
-## Environment Setup
+![Teaser Image](assets/network_architecture.png)
+
+##▫️Environment Setup
 ```bash
 conda env create -f environment.yaml
 conda activate ldpoly
@@ -130,12 +132,4 @@ We welcome collaborations in polygonal vectorization, topographic mapping, and r
 
 ## Acknowledgements
 
-We gratefully acknowledge the open-source contributions that made this work possible:
-
-- **HiSup** – https://github.com/SarahwXU/HiSup  
-
-- **Stable Diffusion** – https://github.com/pesser/stable-diffusion  
-
-- **SDSeg** – https://github.com/lin-tianyu/Stable-Diffusion-Seg  
-
-Their excellent codebases provided valuable inspiration and technical foundations for LDPoly.
+This repository benefits from the excellent open-source contributions of [HiSup](https://github.com/SarahwXU/HiSup), [Stable Diffusion](https://github.com/pesser/stable-diffusion), and [SDSeg](https://github.com/lin-tianyu/Stable-Diffusion-Seg). We thank the authors for their great work.
