@@ -3,7 +3,7 @@ This is the official repository for LDPoly, the first generative framework and b
 
 ![Teaser Image](assets/network_architecture.png)
 
-##▫️Environment Setup
+## ▫️Environment Setup
 ```bash
 conda env create -f environment.yaml
 conda activate ldpoly
