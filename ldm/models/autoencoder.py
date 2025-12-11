@@ -347,22 +347,13 @@ class AutoencoderKL(pl.LightningModule):
             self.init_from_ckpt(ckpt_path, ignore_keys=ignore_keys, ddconfig=ddconfig)
 
     def init_from_ckpt(self, path, ignore_keys=list(), ddconfig=None):
-        sd = torch.load(path, map_location="cpu")["state_dict"]
+        # sd = torch.load(path, map_location="cpu")["state_dict"]
 
-        # detect and init multi-class input-output layer:
-        # model_in, model_out = ddconfig.in_channels, ddconfig.out_ch
-        # sd_in, sd_out = sd["encoder.conv_in.weight"].shape, sd["decoder.conv_out.weight"].shape
-        # # print(sd_in, sd["encoder.conv_in.bias"].shape)
-        # # print(sd_out, sd["decoder.conv_out.bias"].shape)
-        # assert model_in == model_out and sd_in[1] == sd_out[0]
-        # if model_in != sd_in[1] and self.num_classes > 2:
-        #     sd_in, sd_out = torch.tensor(sd_in), torch.tensor(sd_out)
-        #     sd_in[1], sd_out[0] = model_in, model_out
-        #     sd["encoder.conv_in.weight"] = torch.rand(tuple(sd_in))
-        #     sd["encoder.conv_in.bias"] = torch.rand(sd["encoder.conv_in.bias"].shape)#.fill_(1)
-        #     sd["decoder.conv_out.weight"] = torch.rand(tuple(sd_out))
-        #     sd["decoder.conv_out.bias"] = torch.rand(model_out)
-        #     print("\033[31m[ATT]: rand-initialize autoencoder with multi-channel input-output.\033[0m")
+        # Explicitly disable `weights_only` so that PyTorch can load
+        # full PyTorch Lightning checkpoints (which may contain callbacks, etc.).
+        sd_raw = torch.load(path, map_location="cpu", weights_only=False)
+        # Standard PL checkpoints store weights under the "state_dict" key.
+        sd = sd_raw["state_dict"] if isinstance(sd_raw, dict) and "state_dict" in sd_raw else sd_raw
 
         keys = list(sd.keys())
         for k in keys:
