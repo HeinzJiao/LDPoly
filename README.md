@@ -107,9 +107,9 @@ After downloading:
    (LDPoly will automatically find the dataset structure.)
 
 3. **Place the entire `kl-f8/` folder under:** 
-<pre>
+```
 LDPoly/models/first_stage_models
-<\pre>
+```
     
 ## ▫️Demo
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
