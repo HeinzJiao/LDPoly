@@ -53,7 +53,7 @@ def ext_c_to_poly_coco(ext_c, im_h, im_w):
                  vertex duplicated.
     """
     mask = np.zeros([im_h + 1, im_w + 1], dtype=np.uint8)
-    polygon = np.int0(ext_c)
+    polygon = ext_c.astype(np.int32)
     cv2.drawContours(mask, [polygon.reshape(-1, 1, 2)], -1, color=1, thickness=-1)
 
     trans_prop_mask = mask.copy()
@@ -118,7 +118,7 @@ def inn_c_to_poly_coco(inn_c, im_h, im_w):
         ndarray: Closed polygon representing the hole.
     """
     mask = np.zeros([im_h + 1, im_w + 1], dtype=np.uint8)
-    polygon = np.int0(inn_c)
+    polygon = inn_c.astype(np.int32)
     cv2.drawContours(mask, [polygon.reshape(-1, 1, 2)], -1, color=1, thickness=-1)
 
     trans_prop_mask = mask.copy()
