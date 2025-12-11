@@ -79,7 +79,15 @@ def load_model(config_path, checkpoint_path, device):
     config["model"]["target"] = "ldm.models.diffusion.ddpm_seg_vertex_inference.ExtendedLatentDiffusion"
 
     model = instantiate_from_config(config.model)
-    pl_sd = torch.load(checkpoint_path, map_location="cpu")
+
+    # pl_sd = torch.load(checkpoint_path, map_location="cpu")
+
+    # Explicitly disable `weights_only` so that PyTorch can load
+    # full PyTorch Lightning checkpoints (which may contain callbacks, etc.).
+    pl_sd_raw = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+    # Standard PL checkpoints store weights under the "state_dict" key.
+    pl_sd = pl_sd_raw["state_dict"] if isinstance(pl_sd_raw, dict) and "state_dict" in pl_sd_raw else pl_sd_raw
+    
     model.load_state_dict(pl_sd["state_dict"], strict=False)
 
     model.to(device)
@@ -498,3 +506,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
