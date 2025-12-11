@@ -109,7 +109,7 @@ After downloading:
 3. **Place the entire `kl-f8/` folder under: 'LDPoly/models/first_stage_models'** 
     
 ## ▫️Demo
-https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
+👉 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
 
 ## ▫️Code Status
 The codebase will continue to be refined and standardized, but the current version is fully functional for both training and inference.
@@ -128,7 +128,7 @@ We kindly encourage you to cite our paper if you find LDPoly useful in your rese
   publisher={Elsevier}
 }
 ```
-We welcome collaborations in polygonal vectorization, topographic mapping, and related research areas.
+🤝 We welcome collaborations in polygonal vectorization, topographic mapping, and related research areas.
 
 ## ▫️Acknowledgements
 
