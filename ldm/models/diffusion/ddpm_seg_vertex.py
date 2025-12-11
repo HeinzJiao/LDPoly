@@ -29,7 +29,7 @@ from ldm.modules.ema import LitEma
 from ldm.modules.distributions.distributions import normal_kl, DiagonalGaussianDistribution
 from ldm.models.autoencoder import AutoencoderKL, VQModelInterface, IdentityFirstStage
 from ldm.modules.diffusionmodules.util import make_beta_schedule, extract_into_tensor, noise_like
-from ldm.models.diffusion.custom_ddim_building_mask_vertex_heatmap import DDIMSampler, DDIMSamplerWithGrad
+from ldm.models.diffusion.ddim_seg_vertex import DDIMSampler, DDIMSamplerWithGrad
 from ldm.models.diffusion.plms import PLMSSampler
 from scripts.slice2seg import prepare_for_first_stage, dice_score, iou_score
 from ldm.data.synapse import colorize
