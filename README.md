@@ -106,12 +106,15 @@ After downloading:
 2. **Place the entire `data/` folder in the project root**  
    (LDPoly will automatically find the dataset structure.)
 
-## ▫️Demo (to be updated)
+3. **Place the entire `kl-f8/` folder under:** 
+<pre>
+LDPoly/models/first_stage_models
+<\pre>
+    
+## ▫️Demo
 https://colab.research.google.com/drive/1IW5AGfn3w3y9wSquYgXolGhcVwIWkoNd#scrollTo=eval_run
 
 ## ▫️Code Status
-The demo will be updated before Chirstmas. We will open access once the notebook is ready.
-
 The codebase will continue to be refined and standardized, but the current version is fully functional for both training and inference.
 If you encounter any issues, feel free to open an Issue on GitHub.
 
