@@ -81,19 +81,23 @@ def load_model(config_path, checkpoint_path, device):
     model = instantiate_from_config(config.model)
 
     # pl_sd = torch.load(checkpoint_path, map_location="cpu")
+    # model.load_state_dict(pl_sd["state_dict"], strict=False)
 
-    # Explicitly disable `weights_only` so that PyTorch can load
-    # full PyTorch Lightning checkpoints (which may contain callbacks, etc.).
-    pl_sd_raw = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
-    # Standard PL checkpoints store weights under the "state_dict" key.
-    pl_sd = pl_sd_raw["state_dict"] if isinstance(pl_sd_raw, dict) and "state_dict" in pl_sd_raw else pl_sd_raw
-    
-    model.load_state_dict(pl_sd["state_dict"], strict=False)
+    ckpt = torch.load(checkpoint_path, map_location="cpu", weights_only=False)
+
+    if isinstance(ckpt, dict) and "state_dict" in ckpt:
+        # Lightning-style checkpoint: {'state_dict': ..., 'epoch': ..., ...}
+        state_dict = ckpt["state_dict"]
+    else:
+        # Plain state_dict: saved via torch.save(model.state_dict(), ...)
+        state_dict = ckpt
+
+    missing, unexpected = model.load_state_dict(state_dict, strict=False)
+    print(f"[Checkpoint] Loaded with {len(missing)} missing and {len(unexpected)} unexpected keys.")
 
     model.to(device)
     model.eval()
     return model
-
 
 # -------------------------------------------------------------------------
 #  Single-image inference: run model + save logits
@@ -506,4 +510,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
