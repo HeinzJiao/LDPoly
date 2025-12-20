@@ -269,7 +269,7 @@ def compute_cse(input_json, gti_annotations, output_dir=None):
     if output_dir is not None:
         os.makedirs(output_dir, exist_ok=True)
         annotation_name = os.path.splitext(os.path.basename(input_json))[0]
-        out_path = os.path.join(output_dir, f"{annotation_name}_overlap_metrics.json")
+        out_path = os.path.join(output_dir, f"{annotation_name}_coverage_simplicity_metrics.json")
         with open(out_path, "w") as f:
             json.dump(results, f, indent=2)
         print("Per-image metrics saved to:", out_path)
