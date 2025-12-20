@@ -299,7 +299,7 @@ class ExtendedLatentDiffusion(LatentDiffusion):
         n_row = min(x.shape[0], n_row)
 
         # For reference: input vertex heatmap (after preprocessing)
-        log["heat"] = h
+        log["ground_truth_heat"] = h
 
         # Optionally log autoencoder reconstructions
         if return_first_stage_outputs:
