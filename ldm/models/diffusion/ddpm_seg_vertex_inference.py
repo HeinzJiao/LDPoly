@@ -225,7 +225,7 @@ class ExtendedLatentDiffusion(LatentDiffusion):
                - logs conditioning latents.
 
         Returned keys (subset, depending on flags and sampler):
-            - "heat"                                  : input vertex heatmap (pre-encoded)
+            - "ground_truth_heat"                                  : input vertex heatmap (pre-encoded)
             - "reconstruction_seg", "reconstruction_heat"
             - "conditioning_latent"
             - "diffusion_row_*" / "diffusion_row_latent_*"
