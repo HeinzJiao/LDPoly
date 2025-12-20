@@ -340,7 +340,7 @@ def compute_scr(input_json, gti_annotations, output_dir, angle_threshold_deg=15)
 
     # Optionally save per-image results
     # os.makedirs(output_dir, exist_ok=True)
-    # out_path = os.path.join(output_dir, "scr_metrics.json")
+    # out_path = os.path.join(output_dir, "regularity_metrics.json")
     # with open(out_path, "w") as f:
     #     json.dump(scr_results, f, indent=4)
 
@@ -386,4 +386,5 @@ if __name__ == "__main__":
 
     print("\n=== Regularity metrics summary ===")
     print(f"Average PoLiS: {avg_polis:.6f}")
+
     print(f"Average SCR  : {avg_scr:.6f}")
