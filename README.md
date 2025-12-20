@@ -85,7 +85,6 @@ This will produce: segmentation logits, vertex heatmaps, vector polygons.
 python evaluation.py \
     --gt-file ./data/deventer_road/annotations/test.json \
     --dt-file ./outputs/deventer_road_reproduction/epoch=824-step=739199/polygons_seg_ddim_vertices_from_heat_th-0.1_k-3_dp_eps2.json \
-    --output ./outputs/deventer_road_reproduction/epoch=824-step=739199 \
     --eval-type cse
 ```
 `--eval-type`:
