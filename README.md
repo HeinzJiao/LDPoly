@@ -94,10 +94,10 @@ python evaluation.py \
 To evaluate polygon connectivity (**APLS**):
 ```
 python eval_apls.py \
-        --dt_file path/to/prediction.json \
-        --gt_file path/to/ground_truth.json \
-        --gt_folder path/to/gt_network_graphs \
-        --output_folder path/to/output_dir
+    --dt_file path/to/prediction.json \
+    --gt_file path/to/ground_truth.json \
+    --gt_folder path/to/gt_network_graphs \
+    --output_folder path/to/output_dir
 ```
 
 ## ▫️Dataset & Pretrained Weights
