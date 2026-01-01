@@ -91,6 +91,15 @@ python evaluation.py \
 - `cse` → pixel-level coverage (**IoU, B-IoU**), polygon simplicity (**S-IoU**), vertex efficiency (**C-IoU, N-ratio**)
 - `r`   → polygon regularity (**PoLiS, SCR**)
 
+To evaluate polygon connectivity (**APLS**):
+```
+python eval_apls.py \
+        --dt_file path/to/prediction.json \
+        --gt_file path/to/ground_truth.json \
+        --gt_folder path/to/gt_network_graphs \
+        --output_folder path/to/output_dir
+```
+
 ## ▫️Dataset & Pretrained Weights
 
 The **Dutch polygonal road outline extraction dataset** and the **pretrained LDPoly weights** (trained on the Deventer region) can be downloaded here:
