@@ -1,0 +1,58 @@
+[project]
+name = "ldpoly"
+version = "0.1.0"
+description = "Latent Diffusion for Polygonal Road Outline Extraction in Large-Scale Topographic Mapping"
+readme = "README.md"
+requires-python = ">=3.11,<3.12"
+license = { file = "LICENSE.md" }
+
+dependencies = [
+    # Core deep learning stack. The original environment pinned torch 1.11 /
+    # cu113, which has no kernels for Blackwell (sm_120) GPUs, so the stack is
+    # modernized to torch 2.7+ on CUDA 12.8.
+    "torch>=2.7",
+    "torchvision>=0.22",
+    "pytorch-lightning>=2.2",
+
+    # Model / config plumbing
+    "omegaconf>=2.3",
+    "einops>=0.7",
+    "transformers>=4.40",
+    "clip-anytorch>=2.6",             # maintained packaging of openai/CLIP
+    "taming-transformers-rom1504>=0.0.6",
+
+    # Arrays, imaging, geometry
+    "numpy>=1.26",
+    "pillow>=10.0",
+    "opencv-python>=4.9",
+    "scipy>=1.11",
+    "scikit-image>=0.22",
+    "matplotlib>=3.8",
+    "shapely>=2.0",
+    "networkx>=3.2",
+    "pycocotools>=2.0.7",
+    "nibabel>=5.2",                   # imported transitively via ldm.data.synapse
+    "tqdm>=4.66",
+]
+
+# Dependencies from the original environment.yaml that are deliberately dropped:
+#   kornia, albumentations, descartes, h5py, natsort, imageio, imageio-ffmpeg,
+#   pudb, streamlit, test-tube, invisible-watermark, diffusers, torchmetrics
+# None are reachable from the training or inference entrypoints. `descartes` in
+# particular is unmaintained and breaks against matplotlib >= 3.5.
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["ldm", "scripts", "metrics"]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128" }]
+torchvision = [{ index = "pytorch-cu128" }]

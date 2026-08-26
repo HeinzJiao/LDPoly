@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+
+# uv / virtualenv
+.venv/
+venv/
+
+# Datasets, checkpoints and run artifacts.
+# These are anchored to the repository root so they do not shadow the
+# `ldm/data/` source package, which is tracked.
+/data
+/logs
+/output
+/outputs
+*.ckpt
+*.pth
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
